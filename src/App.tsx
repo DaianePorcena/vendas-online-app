@@ -1,15 +1,11 @@
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
-import { ContainerLogin } from './modules/login/styles/login.styles';
-import Input from './shared/components/input/input';
+import Login from './modules/login';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <ContainerLogin>
-        <Text>Texto de exemplo</Text>
-        <Input />
-      </ContainerLogin>
+      <Login />
     </SafeAreaView>
   );
 };
