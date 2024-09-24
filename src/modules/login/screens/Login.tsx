@@ -9,7 +9,8 @@ const Login = () => {
   };
   return (
     <ContainerLogin>
-      <Input placeholder="Digite seu e-mail" title="E-mail:" />
+      <Input margin="0px 0px 8px 0px" placeholder="Digite seu e-mail" title="E-mail:" />
+      <Input secureTextEntry placeholder="Digite sua senha" title="Senha:" />
       <Button
         type={theme.buttons.buttonsTheme.primary}
         margin="16px"
