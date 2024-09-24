@@ -7,9 +7,10 @@ import { textEnums } from './textEnums';
 interface TextProps extends TextPropsNative {
   color?: string;
   type?: string;
+  margin?: string;
 }
 
-const Text = ({ color, type, ...props }: TextProps) => {
+const Text = ({ margin, color, type, ...props }: TextProps) => {
   const FontSize = useMemo(() => {
     switch (type) {
       case textEnums.TITLE_BOLD:
@@ -67,7 +68,15 @@ const Text = ({ color, type, ...props }: TextProps) => {
     }
   }, [type]);
 
-  return <ContainerText fontFamily={fontFamily} fontSize={FontSize} color={color} {...props} />;
+  return (
+    <ContainerText
+      margin={margin}
+      fontFamily={fontFamily}
+      fontSize={FontSize}
+      color={color}
+      {...props}
+    />
+  );
 };
 
 export default Text;
