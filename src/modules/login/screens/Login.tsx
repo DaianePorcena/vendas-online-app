@@ -1,7 +1,6 @@
-import { Text } from 'react-native';
-
 import Button from '../../../shared/components/button/Button';
 import Input from '../../../shared/components/input/input';
+import { theme } from '../../../shared/themes/theme';
 import { ContainerLogin } from '../styles/login.styles';
 
 const Login = () => {
@@ -10,9 +9,13 @@ const Login = () => {
   };
   return (
     <ContainerLogin>
-      <Text>ghj</Text>
       <Input />
-      <Button margin="16px" title="ENTRAR" onPress={handleOnPress} />
+      <Button
+        type={theme.buttons.buttonsTheme.primary}
+        margin="16px"
+        title="ENTRAR"
+        onPress={handleOnPress}
+      />
     </ContainerLogin>
   );
 };
