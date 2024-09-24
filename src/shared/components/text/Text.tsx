@@ -51,13 +51,17 @@ const Text = ({ color, type, ...props }: TextProps) => {
       case textEnums.PARAGRAPH_LIGHT:
       case textEnums.PARAGRAPH_SMALL_LIGHT:
         return 'Poppins-Light';
+      case textEnums.TITLE_SEMI_BOLD:
+      case textEnums.SUBTITLE_SEMI_BOLD:
+      case textEnums.BUTTON_SEMI_BOLD:
+      case textEnums.PARAGRAPH_SEMI_BOLD:
+      case textEnums.PARAGRAPH_SMALL_SEMI_BOLD:
+        return 'Poppins-SemiBold';
       case textEnums.TITLE_REGULAR:
       case textEnums.SUBTITLE_REGULAR:
       case textEnums.BUTTON_REGULAR:
       case textEnums.PARAGRAPH_REGULAR:
       case textEnums.PARAGRAPH_SMALL_REGULAR:
-        return 'Poppins-Regular';
-
       default:
         return 'Poppins-Regular';
     }
