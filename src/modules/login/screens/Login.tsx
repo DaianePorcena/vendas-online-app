@@ -1,7 +1,10 @@
+import React from 'react';
+
+import logoImage from '../../../assets/images/logo.png';
 import Button from '../../../shared/components/button/Button';
 import Input from '../../../shared/components/input/input';
 import { theme } from '../../../shared/themes/theme';
-import { ContainerLogin } from '../styles/login.styles';
+import { ContainerLogin, Imagelogo } from '../styles/login.styles';
 
 const Login = () => {
   const handleOnPress = () => {
@@ -9,6 +12,7 @@ const Login = () => {
   };
   return (
     <ContainerLogin>
+      <Imagelogo resizeMode="contain" source={logoImage} />
       <Input margin="0px 0px 8px 0px" placeholder="Digite seu e-mail" title="E-mail:" />
       <Input secureTextEntry placeholder="Digite sua senha" title="Senha:" />
       <Button
