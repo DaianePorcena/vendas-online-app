@@ -1,3 +1,4 @@
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 import { useGlobalReducer } from '../../store/reducer/globalReducer/useGlobalReduce';
@@ -7,6 +8,7 @@ import { RequestLogin } from '../types/requestLogin';
 import { ReturnLogin } from '../types/returnLogin';
 
 export const useRequest = () => {
+  const { navigate } = useNavigation<NavigationProp<ParamListBase>>();
   const { setUser } = useUserReducer();
   const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,6 +19,7 @@ export const useRequest = () => {
     await connectionAPIPost<ReturnLogin>('http://192.168.1.2:8080/auth', body)
       .then((result) => {
         setUser(result.user);
+        navigate('Home');
       })
       .catch(() => {
         setModal({ visible: true, title: 'Erro', text: 'Usuário ou senha inválidos' });
@@ -24,10 +27,5 @@ export const useRequest = () => {
     setLoading(false);
   };
 
-  return {
-    loading,
-    errorMessage,
-    setErrorMessage,
-    authRequest,
-  };
+  return { authRequest, loading, errorMessage, setErrorMessage };
 };
