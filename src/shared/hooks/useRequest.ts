@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useGlobalReducer } from '../../store/reducer/globalReducer/useGlobalReduce';
 import { useUserReducer } from '../../store/reducer/userReducer/useUserReducer';
 import { MenuUrl } from '../enums/MenuUrl.enum';
+import { setAuthorizationToken } from '../functions/connection/auth';
 import { connectionAPIPost } from '../functions/connection/connectionAPI';
 import { RequestLogin } from '../types/requestLogin';
 import { ReturnLogin } from '../types/returnLogin';
@@ -19,6 +20,7 @@ export const useRequest = () => {
     setLoading(true);
     await connectionAPIPost<ReturnLogin>('http://192.168.1.2:8080/auth', body)
       .then((result) => {
+        setAuthorizationToken(result.accessToken);
         setUser(result.user);
         reset({
           index: 0,
