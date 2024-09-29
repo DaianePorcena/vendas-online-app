@@ -5,9 +5,20 @@ import { useGlobalReducer } from '../../store/reducer/globalReducer/useGlobalRed
 import { useUserReducer } from '../../store/reducer/userReducer/useUserReducer';
 import { MenuUrl } from '../enums/MenuUrl.enum';
 import { setAuthorizationToken } from '../functions/connection/auth';
-import { connectionAPIPost } from '../functions/connection/connectionAPI';
+import ConnectionAPI, {
+  connectionAPIPost,
+  MethodType,
+} from '../functions/connection/connectionAPI';
 import { RequestLogin } from '../types/requestLogin';
 import { ReturnLogin } from '../types/returnLogin';
+
+interface requestProps<T> {
+  url: string;
+  method: MethodType;
+  saveGlobal?: (object: T) => void;
+  body?: unknown;
+  message?: string;
+}
 
 export const useRequest = () => {
   const { reset } = useNavigation<NavigationProp<ParamListBase>>();
@@ -15,6 +26,34 @@ export const useRequest = () => {
   const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const request = async <T>({
+    url,
+    method,
+    saveGlobal,
+    body,
+    message,
+  }: requestProps<T>): Promise<T | undefined> => {
+    setLoading(true);
+    const returnObject = await ConnectionAPI.connect<T>(url, method, body)
+      .then((result) => {
+        if (saveGlobal) {
+          saveGlobal(result);
+        }
+        if (message) {
+          setModal({ visible: true, title: 'Sucesso', text: message });
+
+          return result;
+        }
+      })
+      .catch((error: Error) => {
+        setModal({ visible: true, title: 'Erro', text: error.message });
+        return undefined;
+      });
+
+    setLoading(false);
+    return returnObject;
+  };
 
   const authRequest = async (body: RequestLogin) => {
     setLoading(true);
@@ -33,5 +72,5 @@ export const useRequest = () => {
     setLoading(false);
   };
 
-  return { authRequest, loading, errorMessage, setErrorMessage };
+  return { authRequest, loading, errorMessage, setErrorMessage, request };
 };
