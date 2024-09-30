@@ -1,6 +1,10 @@
+import { TouchableOpacity } from 'react-native';
+
 import logoImage from '../../../assets/images/logo.png';
 import Button from '../../../shared/components/button/Button';
 import Input from '../../../shared/components/input/input';
+import Text from '../../../shared/components/text/Text';
+import { textEnums } from '../../../shared/components/text/textEnums';
 import { theme } from '../../../shared/themes/theme';
 import { useLogin } from '../hooks/useLogin';
 import { ContainerLogin, Imagelogo } from '../styles/login.styles';
@@ -14,6 +18,7 @@ const Login = () => {
     handleOnPress,
     handleOnChangeEmail,
     handleOnChangePassword,
+    handleGoToCreateUser,
   } = useLogin();
 
   return (
@@ -35,10 +40,18 @@ const Login = () => {
         title="Senha:"
         onChange={handleOnChangePassword}
       />
+      <TouchableOpacity onPress={handleGoToCreateUser}>
+        <Text
+          margin="16px"
+          type={textEnums.PARAGRAPH_SEMI_BOLD}
+          color={theme.colors.mainTheme.primary}
+        >
+          Cadastrar Usuário
+        </Text>
+      </TouchableOpacity>
       <Button
         type={theme.buttons.buttonsTheme.primary}
         loading={loading}
-        margin="16px"
         title="ENTRAR"
         onPress={handleOnPress}
       />
