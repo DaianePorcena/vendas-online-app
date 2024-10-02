@@ -5,8 +5,6 @@ import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { MethodEnum } from '../../../enums/methods.enum';
 import { URL_USER } from '../../../shared/constants/urls';
 import { MenuUrl } from '../../../shared/enums/MenuUrl.enum';
-import { insertMaskInCpf } from '../../../shared/functions/cpf';
-import { insertMaskInPhone } from '../../../shared/functions/phone';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { CreateUserType } from '../../../shared/types/createUserType';
 
@@ -58,22 +56,9 @@ export const useCreateUser = () => {
     event: NativeSyntheticEvent<TextInputChangeEventData>,
     name: string,
   ) => {
-    let text = event.nativeEvent.text;
-    switch (name) {
-      case 'cpf':
-        text = insertMaskInCpf(text);
-        break;
-      case 'phone':
-        text = insertMaskInPhone(text);
-        break;
-      default:
-        text = event.nativeEvent.text;
-        break;
-    }
-    console.log('text', text);
     setCreateUser((currentCreateUser) => ({
       ...currentCreateUser,
-      [name]: text,
+      [name]: event.nativeEvent.text,
     }));
   };
   return { createUser, loading, disabled, handleOnChangeInput, handleCreateUser };
