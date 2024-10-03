@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native';
 
 import logoImage from '../../../assets/images/logo.png';
 import Button from '../../../shared/components/button/Button';
-import Input from '../../../shared/components/input/input';
+import Input from '../../../shared/components/input/Input';
 import Text from '../../../shared/components/text/Text';
 import { textEnums } from '../../../shared/components/text/textEnums';
 import { theme } from '../../../shared/themes/theme';
